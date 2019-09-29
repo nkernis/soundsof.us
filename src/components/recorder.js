@@ -2,8 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-// import P5Wrapper from './P5Wrapper';
-// import Sketch from './sketch'
 import "p5/lib/addons/p5.sound.min"
 import p5 from "p5"
 
@@ -70,7 +68,6 @@ class Recorder extends React.Component {
 					</Typography>
 					<button onClick={this.start}>start</button>
 					<button onClick={this.stop}>stop</button>
-					{/* <P5Wrapper sketch={(p5) => Sketch(p5, "carl")} carl="carl"/> */}
 				</div>
 			</React.Fragment>
 		)
