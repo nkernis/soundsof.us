@@ -9,23 +9,28 @@ import AudioPlayer from "react-h5-audio-player";
 
 const styles = theme => ({
 	container: {
-		padding: theme.spacing.unit * 1.2,
+		padding: theme.spacing(2.0),
+		textAlign: "center"
 	},
-	audio: {
-		width: "600",
-		height: "166",
-		borderRadius: "25px",
+	description: {
+		padding: theme.spacing(5.0)
 	}
 })
 
-const description = "WORDS"
-
-class ItpVideo extends React.Component {
+class SoundsOfUs extends React.Component {
 
 	state = {
 		baseURL: "https://s3.amazonaws.com/media.noahkernis.com/audio/",
 		sounds: [
-			"in_my_mind_addiction.mp3",
+			// "in_my_mind_addiction.mp3",
+			// "in_my_mind_addiction.mp3",
+			// "in_my_mind_addiction.mp3",
+			// "in_my_mind_addiction.mp3",
+			// "in_my_mind_addiction.mp3",
+			// "in_my_mind_addiction.mp3",
+			// "in_my_mind_addiction.mp3",
+			// "in_my_mind_addiction.mp3",
+			// "in_my_mind_addiction.mp3",
 			"in_my_mind_addiction.mp3"
 		]
 	}
@@ -43,14 +48,10 @@ class ItpVideo extends React.Component {
 
 		return sounds.map((soundName, i) => {
 			return (
-				<div className={classes.container} >
-					<Description title='In My Mind: Addiction' body={description} />
-					{/* <audio controls className={classes.audio} key={i}>
-						<source src={baseURL + soundName} type="audio/mpeg" />
-						Your browser does not support the audio tag. <br />
-						The audio is available here: https://s3.amazonaws.com/media.noahkernis.com/audio/in_my_mind_addiction.mp3
-					</audio> */}
-					<AudioPlayer src={baseURL + soundName } />
+				<div className={classes.container} key={i} >
+					<Description title='In My Mind: Addiction'/>
+					{/* <img src={"https://loremflickr.com/200/200/home,earth?random=" + i} /> */}
+					<AudioPlayer src={baseURL + soundName} />
 				</div>
 			)
 		})
@@ -63,12 +64,12 @@ class ItpVideo extends React.Component {
 		<React.Fragment >
 			<Recorder/>
 			<div className={classes.container}>
-				<Typography variant='h6' className={classes.headers}>
-					BELOW HERE ARE SOUNDS
+				<Typography variant='h6' className={classes.description}>
+					SOUNDS FOR LISTENING
 				</Typography>
 				<Grid
 					container
-					spacing={16}
+					spacing={10}
 					alignItems='center'
 					justify='center'
 				>
@@ -80,8 +81,8 @@ class ItpVideo extends React.Component {
 	}
 }
 
-ItpVideo.propTypes = {
+SoundsOfUs.propTypes = {
 	classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(ItpVideo)
+export default withStyles(styles)(SoundsOfUs)

@@ -1,3 +1,25 @@
 body {
 	background-color: #ffffff !important;
 }
+
+.react-h5-audio-player > .flex{
+	border-radius: 25px !important;
+	color: rgba(0, 0, 0, 0.87);
+	margin: 0;
+	line-height: 1.5;
+	background-color: #fff !important;
+}
+
+.toggle-play-wrapper {
+	border-radius: 25px !important;
+}
+
+.toggle-play-button {
+	background-color: black !important;
+	border-radius: 25px !important;
+}
+
+
+img {
+	filter: saturate(20) hue-rotate(45deg) contrast(150%) brightness(150%);
+}

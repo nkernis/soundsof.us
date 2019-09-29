@@ -11,8 +11,8 @@ const styles = theme => ({
     overflow: 'hidden',
     display: 'block',
     position: 'relative',
-    marginLeft: theme.spacing.unit * 1.2,
-    marginRight: theme.spacing.unit * 1.2
+    marginLeft: theme.spacing(1.2),
+    marginRight: theme.spacing(1.2)
   }
 })
 

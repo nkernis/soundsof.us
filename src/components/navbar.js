@@ -8,8 +8,8 @@ const styles = theme => ({
   a: {
     color: 'inherit',
     textDecoration: 'none',
-    marginRight: theme.spacing.unit * 2.0,
-    marginBottom: theme.spacing.unit * 2.0,
+    marginRight: theme.spacing(2.0),
+    marginBottom: theme.spacing(2.0),
     '&:hover': {
       textDecoration: 'underline'
     }
@@ -18,8 +18,8 @@ const styles = theme => ({
     color: 'inherit',
     textDecoration: 'none',
     fontStyle: 'italic',
-    marginRight: theme.spacing.unit * 2.0,
-    marginBottom: theme.spacing.unit * 2.0,
+    marginRight: theme.spacing(2.0),
+    marginBottom: theme.spacing(2.0),
     '&:hover': {
       textDecoration: 'underline',
     }

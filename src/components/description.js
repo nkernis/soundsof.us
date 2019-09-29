@@ -6,12 +6,12 @@ import Parser from 'html-react-parser'
 
 const styles = theme => ({
   layout: {
-    marginBottom: theme.spacing.unit * 2.5,
+    marginBottom: theme.spacing(2.5),
     whiteSpace: 'pre-wrap'
   },
   headers: {
-    marginTop: theme.spacing.unit * 1.2,
-    marginBottom: theme.spacing.unit * 2
+    marginTop: theme.spacing(1.2),
+    marginBottom: theme.spacing(2.0)
   }
 })
 
