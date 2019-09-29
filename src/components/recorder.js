@@ -31,7 +31,7 @@ class Recorder extends React.Component {
 					<Typography variant="h6" className={classes.headers}>
 						Recorder
 					</Typography>
-					<P5Wrapper sketch={Sketch}/>
+					<P5Wrapper sketch={(p5) => Sketch(p5, "carl")} carl="carl"/>
 				</div>
 			</React.Fragment>
 		)
