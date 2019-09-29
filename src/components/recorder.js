@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import P5Wrapper from 'react-p5-wrapper';
+import P5Wrapper from './P5Wrapper';
 import Sketch from './sketch'
 
 const styles = theme => ({
