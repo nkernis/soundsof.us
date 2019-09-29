@@ -2,8 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import P5Wrapper from './P5Wrapper';
-import Sketch from './sketch'
+// import P5Wrapper from './P5Wrapper';
+// import Sketch from './sketch'
+import "p5/lib/addons/p5.sound.min"
+import p5 from "p5"
+
+const mic = new p5.AudioIn()
+mic.start()
+
+const soundRec = new p5.SoundRecorder()
+soundRec.setInput(mic)
+
+const soundFile = new p5.SoundFile()
 
 const styles = theme => ({
 	layout: {
@@ -20,6 +30,33 @@ class Recorder extends React.Component {
 	state = {
 		baseURL: "http://localhost:3001/api/v1/sounds/new"
 	}
+	start = () => {
+		soundRec.record(soundFile)
+
+	}
+
+	stop = () => {
+		soundRec.stop()
+		let soundBlob = soundFile.getBlob()
+		console.log(soundBlob)
+
+		let formData = new FormData()
+
+		formData.append('soundBlob', soundBlob)
+
+		let fetchOptions = {
+			method: 'POST',
+			body: formData,
+			headers: new Headers({
+				'enctype': 'multipart/form-data'
+			})
+		}
+
+		fetch("http://localhost:3001/api/v1/sounds/new", fetchOptions)
+			.then(res => {
+				console.log(res.status)
+			})
+	}
 
 	render() {
 		const { recording, stream } = this.state
@@ -31,7 +68,9 @@ class Recorder extends React.Component {
 					<Typography variant="h6" className={classes.headers}>
 						Recorder
 					</Typography>
-					<P5Wrapper sketch={(p5) => Sketch(p5, "carl")} carl="carl"/>
+					<button onClick={this.start}>start</button>
+					<button onClick={this.stop}>stop</button>
+					{/* <P5Wrapper sketch={(p5) => Sketch(p5, "carl")} carl="carl"/> */}
 				</div>
 			</React.Fragment>
 		)
