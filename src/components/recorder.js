@@ -137,7 +137,7 @@ class Recorder extends React.Component {
 					})
 				}
 
-				fetch("http://localhost:3001/api/v1/sounds/new", fetchOptions)
+				fetch(this.state.baseURL, fetchOptions)
 					.then(res => {
 						console.log(res.status)
 					})
