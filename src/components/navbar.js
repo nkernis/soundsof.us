@@ -9,9 +9,8 @@ const styles = theme => ({
     color: 'inherit',
     textDecoration: 'none',
     marginRight: theme.spacing(2.0),
-    marginBottom: theme.spacing(2.0),
     '&:hover': {
-      textDecoration: 'underline'
+		fontStyle: "italic"
     }
   },
   selected: {
@@ -19,10 +18,10 @@ const styles = theme => ({
     textDecoration: 'none',
     fontStyle: 'italic',
     marginRight: theme.spacing(2.0),
-    marginBottom: theme.spacing(2.0),
-    '&:hover': {
-      textDecoration: 'underline',
-    }
+    marginBottom: theme.spacing(2.0)
+  },
+  navbar: {
+	marginBottom: "40px"
   }
 })
 
@@ -43,7 +42,7 @@ class NavBar extends React.Component {
       let selected = path === pageNameL
 
       return (
-        <Grid key={i} item>
+        <Grid key={i} item className={classes.navbar}>
           <Typography
             component="a"
             variant="h5"
@@ -64,28 +63,30 @@ class NavBar extends React.Component {
     const isRoot = path === ''
 
     return (
+		<div >
       <Grid container>
         <Grid item xs={12}>
           <Grid
             container
             direction="row"
-            justify="flex-start"
-            alignItems="flex-start"
+            justify="center"
+            alignItems="center"
           >
-            <Typography component="a" variant="h2" gutterBottom href="/" className={isRoot ? classes.selected : classes.a}>
+            <Typography component="a" variant="h1" gutterBottom href="/" className={isRoot ? classes.selected : classes.a}>
              SOUNDS OF US
             </Typography>
           </Grid>
           <Grid
             container
             direction="row"
-            justify="flex-start"
-            alignItems="flex-start"
+            justify="center"
+            alignItems="center"
           >
           { this.returnNavbar(path) }
           </Grid>
         </Grid>
       </Grid>
+	  </div>
     );
   }
 }

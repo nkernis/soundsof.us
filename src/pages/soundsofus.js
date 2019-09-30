@@ -27,10 +27,10 @@ class SoundsOfUs extends React.Component {
 			// "in_my_mind_addiction.mp3",
 			// "in_my_mind_addiction.mp3",
 			// "in_my_mind_addiction.mp3",
-			// "in_my_mind_addiction.mp3",
-			// "in_my_mind_addiction.mp3",
-			// "in_my_mind_addiction.mp3",
-			// "in_my_mind_addiction.mp3",
+			"in_my_mind_addiction.mp3",
+			"in_my_mind_addiction.mp3",
+			"in_my_mind_addiction.mp3",
+			"in_my_mind_addiction.mp3",
 			"in_my_mind_addiction.mp3"
 		]
 	}
@@ -50,7 +50,7 @@ class SoundsOfUs extends React.Component {
 			return (
 				<div className={classes.container} key={i} >
 					<Description title='In My Mind: Addiction'/>
-					{/* <img src={"https://loremflickr.com/200/200/home,earth?random=" + i} /> */}
+					<img src={"https://loremflickr.com/200/200/home,earth?random=" + i} />
 					<AudioPlayer src={baseURL + soundName} />
 				</div>
 			)
@@ -64,7 +64,7 @@ class SoundsOfUs extends React.Component {
 		<React.Fragment >
 			<Recorder/>
 			<div className={classes.container}>
-				<Typography variant='h6' className={classes.description}>
+				<Typography variant='h3' className={classes.description}>
 					SOUNDS FOR LISTENING
 				</Typography>
 				<Grid

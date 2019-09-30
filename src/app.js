@@ -2,7 +2,6 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import AppRoutes from './routes.js'
 import NavBar from './components/navbar.js'
-import Footer from './components/footer.js'
 import withRoot from './components/withRoot'
 
 const styles = theme => ({
@@ -11,8 +10,7 @@ const styles = theme => ({
     overflow: 'hidden',
     display: 'block',
     position: 'relative',
-    marginLeft: theme.spacing(1.2),
-    marginRight: theme.spacing(1.2)
+    margin: "10px 10px 0px 10px",
   }
 })
 
@@ -24,7 +22,6 @@ class App extends React.Component {
       <div className={classes.root}>
         <NavBar />
         <AppRoutes />
-        <Footer />
       </div>
     );
   }
