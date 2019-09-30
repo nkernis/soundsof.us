@@ -20,11 +20,13 @@ const styles = theme => ({
 class SoundsOfUs extends React.Component {
 	state = {
 		baseURL: "https://s3.amazonaws.com/media.soundsof.us/",
+		// baseFetchURL: "http://localhost:3001/.netlify/functions/server/api/v1/sounds",
+		baseFetchURL: "https://api.soundsof.us/.netlify/functions/server/api/v1/sounds",
 		sounds: []
 	}
 	
 	componentDidMount() {
-		fetch("http://localhost:3001/api/v1/sounds")
+		fetch(this.state.baseFetchURL)
 			.then(res => res.json())
 			.then(data => {
 				let sounds = data.Contents
@@ -34,6 +36,9 @@ class SoundsOfUs extends React.Component {
 				this.setState({
 					sounds: sounds
 				})
+			})
+			.catch(err => {
+				console.log(err)
 			})
 	}
 
