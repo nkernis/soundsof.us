@@ -18,40 +18,36 @@ const styles = theme => ({
 })
 
 class SoundsOfUs extends React.Component {
-
 	state = {
-		baseURL: "https://s3.amazonaws.com/media.noahkernis.com/audio/",
-		sounds: [
-			// "in_my_mind_addiction.mp3",
-			// "in_my_mind_addiction.mp3",
-			// "in_my_mind_addiction.mp3",
-			// "in_my_mind_addiction.mp3",
-			// "in_my_mind_addiction.mp3",
-			"in_my_mind_addiction.mp3",
-			"in_my_mind_addiction.mp3",
-			"in_my_mind_addiction.mp3",
-			"in_my_mind_addiction.mp3",
-			"in_my_mind_addiction.mp3"
-		]
+		baseURL: "https://s3.amazonaws.com/media.soundsof.us/",
+		sounds: []
+	}
+	
+	componentDidMount() {
+		fetch("http://localhost:3001/api/v1/sounds")
+			.then(res => res.json())
+			.then(data => {
+				let sounds = data.Contents
+				sounds.shift()
+				sounds.reverse()
+				
+				this.setState({
+					sounds: sounds
+				})
+			})
 	}
 
-	// componentWillMount() {
-	// 	fetch("http://localhost:3000/api/v1/books")
-	// 		.then(res => res.json())
-	// 		.then(sounds => this.setState({
-	// 			sounds: sounds
-	// 		}))
-	// }
-
-	returnPortraits = (classes) => {
+	returnSoundCard = (classes) => {
 		const { baseURL, sounds } = this.state
 
-		return sounds.map((soundName, i) => {
+		return sounds.map((sound, i) => {
+			let uri = baseURL + encodeURIComponent(sound.Key)
+
 			return (
 				<div className={classes.container} key={i} >
-					<Description title='In My Mind: Addiction'/>
-					<img src={"https://loremflickr.com/200/200/home,earth?random=" + i} />
-					<AudioPlayer src={baseURL + soundName} />
+					<Description title={sound.Key}/>
+					<img src={"https://loremflickr.com/200/200/home,earth?random=" + i} alt="Random - earth or home from loremflickr.com. Have been manipulated by filters to create odd effects."/>
+					<AudioPlayer src={uri} />
 				</div>
 			)
 		})
@@ -73,7 +69,7 @@ class SoundsOfUs extends React.Component {
 					alignItems='center'
 					justify='center'
 				>
-					{ this.returnPortraits(classes) }
+					{ this.returnSoundCard(classes) }
 				</Grid>
 			</div>	
 		</React.Fragment>

@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
 import { ReactMic } from 'react-mic'
 import "p5/lib/addons/p5.sound.min"
 import p5 from "p5"
@@ -152,7 +151,7 @@ class Recorder extends React.Component {
 	}
 
 	render() {
-		const { recording, soundFile } = this.state
+		const { recording } = this.state
 		const { classes } = this.props
 
 		return (
