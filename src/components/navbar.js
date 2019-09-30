@@ -11,14 +11,14 @@ const styles = theme => ({
     marginRight: theme.spacing(2.0),
     '&:hover': {
 		fontStyle: "italic"
-    }
+	}
   },
   selected: {
     color: 'inherit',
     textDecoration: 'none',
     fontStyle: 'italic',
     marginRight: theme.spacing(2.0),
-    marginBottom: theme.spacing(2.0)
+	marginBottom: theme.spacing(2.0)
   },
   navbar: {
 	marginBottom: "40px"
@@ -45,10 +45,10 @@ class NavBar extends React.Component {
         <Grid key={i} item className={classes.navbar}>
           <Typography
             component="a"
-            variant="h5"
             gutterBottom
             href={'/' + pageNameL}
-            className={selected ? classes.selected : classes.a}
+			className={selected ? classes.selected : classes.a}
+			style={{fontSize: "2.0vw"}}
           >
             { pageName }
           </Typography>
@@ -72,7 +72,13 @@ class NavBar extends React.Component {
             justify="center"
             alignItems="center"
           >
-            <Typography component="a" variant="h1" gutterBottom href="/" className={isRoot ? classes.selected : classes.a}>
+			<Typography 
+				component="a" 
+				variant="h1" 
+				gutterBottom href="/" 
+				className={isRoot ? classes.selected : classes.a}
+				style={{fontSize: "7vw"}}
+			>
              SOUNDS OF US
             </Typography>
           </Grid>

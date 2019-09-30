@@ -13,15 +13,17 @@ const styles = theme => ({
 		textAlign: "center"
 	},
 	description: {
-		padding: theme.spacing(5.0)
+		padding: theme.spacing(5.0),
+		paddingBottom: theme.spacing(8.0),
+		fontSize: "3.5vw",
 	}
 })
 
 class SoundsOfUs extends React.Component {
 	state = {
 		baseURL: "https://s3.amazonaws.com/media.soundsof.us/",
-		// baseFetchURL: "http://localhost:3001/.netlify/functions/server/api/v1/sounds",
-		baseFetchURL: "https://api.soundsof.us/.netlify/functions/server/api/v1/sounds",
+		baseFetchURL: "http://localhost:3001/.netlify/functions/server/api/v1/sounds",
+		// baseFetchURL: "https://api.soundsof.us/.netlify/functions/server/api/v1/sounds",
 		sounds: []
 	}
 	
@@ -65,7 +67,7 @@ class SoundsOfUs extends React.Component {
 		<React.Fragment >
 			<Recorder/>
 			<div className={classes.container}>
-				<Typography variant='h3' className={classes.description}>
+				<Typography variant='h2' className={classes.description}>
 					SOUNDS FOR LISTENING
 				</Typography>
 				<Grid

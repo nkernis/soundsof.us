@@ -1,11 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
+import ReactTimeout from 'react-timeout'
+import { useTimer } from "use-timer"
 import { ReactMic } from 'react-mic'
 import "p5/lib/addons/p5.sound.min"
 import p5 from "p5"
 
-const styles = theme => ({
+const styles = (theme) => ({
 	layout: {
 		marginBottom: "5px",
 		whiteSpace: 'pre-wrap',
@@ -23,7 +25,8 @@ const styles = theme => ({
 		width: "80px",
 		height: "45px",
 		background: "white",
-		borderColor: "black",
+		border: "1px solid black",
+
 		padding: "5px",
 		margin: "10px 2px 10px 2px",
 		verticalAlign: "top"
@@ -39,21 +42,53 @@ const styles = theme => ({
 		maxWidth: "360px",
 		minWidth: "300px",
 		fontSize: "20px"
+	},
+	'@keyframes blinker': {
+        from: {background: "red"},
+        to: {background: "white",}
+	},
+	blinking: {
+		borderRadius: "18px",
+		width: "80px",
+		height: "45px",
+		background: "white",
+		border: "1px solid black",
+		padding: "5px",
+		margin: "10px 2px 10px 2px",
+		verticalAlign: "top",
+		animationName: '$blinker',
+		animationDuration: '1s',
+		animationIterationCount: 'infinite',
 	}
 })
 
 const mic = new p5.AudioIn()
-mic.start()
-
 const soundRec = new p5.SoundRecorder()
+const soundFile = new p5.SoundFile()
+
+mic.start()
 soundRec.setInput(mic)
 
-const soundFile = new p5.SoundFile()
+const Timer = (props) => {
+	const { classes, recButtonAction, playAction, saveAction, isRecording } = props
+	const { time, start, pause, reset } = useTimer({endTime: 60})
+
+	return (
+		<React.Fragment>
+			<button className={isRecording ? classes.blinking : classes.recButtons} onClick={() => recButtonAction(reset, start, pause)}>
+				{ isRecording ? "STOP RECORDING": "RECORD SOUND" }
+			</button>
+			<button className={classes.recButtons} onClick={playAction}>PLAY SOUND</button>
+			<button className={classes.recButtons} onClick={saveAction}>SAVE SOUND</button>
+			<p>Recorder Time: <b>{time} seconds</b> [Max: 60 seconds]</p>
+		</React.Fragment>
+	)
+}
 
 class Recorder extends React.Component {
 	state = {
-		// baseURL: "http://localhost:3001/api/v1/sounds/new",
-		baseURL: "https://api.soundsof.us/.netlify/functions/server/api/v1/sounds/new",
+		baseURL: "http://localhost:3001/api/v1/sounds/new",
+		// baseURL: "https://api.soundsof.us/.netlify/functions/server/api/v1/sounds/new",
 		showRecorder: false,
 		recording: false,
 		soundFile: false,
@@ -71,11 +106,13 @@ class Recorder extends React.Component {
 						backgroundColor={"#ff76ff"}
 					/>
 					<br/>
-					<button className={classes.recButtons} onClick={this.startRec}>START REC</button>
-					<button className={classes.recButtons} onClick={this.stopRec}>STOP REC</button>
-					<button className={classes.recButtons} onClick={this.playBack}>PLAY SOUND</button>
-					<button className={classes.recButtons} onClick={this.save}>SAVE SOUND</button>
-					<br/>
+					<Timer 
+						classes={classes} 
+						recButtonAction={this.recButtonAction} 
+						playAction={this.playBack} 
+						saveAction={this.save} 
+						isRecording={this.state.recording}
+					/>
 					<input
 						ref="input"
 						placeholder='NAME FOR SOUND'
@@ -83,7 +120,6 @@ class Recorder extends React.Component {
 						onChange={(e)=>{this.setState({soundName:e.target.value});}}
 						onFocus={()=>{this.refs.input.select()}}
 					/>
-					<p>length: {soundFile.duration()}</p>
 				</React.Fragment>
 			)
 		} else {
@@ -95,21 +131,41 @@ class Recorder extends React.Component {
 		}
 	}
 
-	startRec = () => {
+	recButtonAction = (resetTimer, startTimer, pauseTimer) => {
+		const { recording } = this.state
+
+		if (!recording) {
+			this.startRec(resetTimer, startTimer)
+		} else {
+			this.stopRec(pauseTimer)
+		}
+
+	}
+
+
+	startRec = (resetTimer, startTimer) => {
+		resetTimer()
+		startTimer()
 		soundRec.record(soundFile)
-		
+		this.props.setTimeout(this.stopRec, 60000)
+
 		this.setState({
 			recording: true
 		})
 	}
 
-	stopRec = () => {
-		soundRec.stop()
+	stopRec = (pauseTimer) => {
+		if (this.state.recording) {
+			pauseTimer()
+			soundRec.stop()
+			this.props.clearTimeout()
 
-		this.setState({
-			recording: false,
-			soundFile: soundFile
-		})
+			this.setState({
+				recording: false,
+				soundFile: soundFile,
+				recButtonText: "START REC"
+			})
+		}
 	}
 
 	playBack = () => {
@@ -158,7 +214,6 @@ class Recorder extends React.Component {
 				<div className={classes.layout}>
 					{this.showRecorder(classes, recording)}
 				</div>
-
 			</React.Fragment>
 		)
 	}
@@ -168,4 +223,4 @@ Recorder.propTypes = {
 	classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(Recorder)
+export default withStyles(styles)(ReactTimeout(Recorder))

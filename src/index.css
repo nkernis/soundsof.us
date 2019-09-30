@@ -19,7 +19,6 @@ body {
 	border-radius: 25px !important;
 }
 
-
 img {
 	filter: saturate(20) hue-rotate(45deg) contrast(150%) brightness(150%);
 }
