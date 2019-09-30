@@ -87,8 +87,8 @@ const Timer = (props) => {
 
 class Recorder extends React.Component {
 	state = {
-		baseURL: "http://localhost:3001/api/v1/sounds/new",
-		// baseURL: "https://api.soundsof.us/.netlify/functions/server/api/v1/sounds/new",
+		// baseURL: "http://localhost:3001/api/v1/sounds/new",
+		baseURL: "https://api.soundsof.us/.netlify/functions/server/api/v1/sounds/new",
 		showRecorder: false,
 		recording: false,
 		soundFile: false,

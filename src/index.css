@@ -8,6 +8,8 @@ body {
 	margin: 0;
 	line-height: 1.5;
 	background-color: #fff !important;
+	box-shadow: none !important;
+	border: 1px solid black;
 }
 
 .toggle-play-wrapper {
@@ -21,4 +23,12 @@ body {
 
 img {
 	filter: saturate(20) hue-rotate(45deg) contrast(150%) brightness(150%);
+}
+
+.indicator {
+	background: #ff76ff none repeat scroll 0% 0% !important;
+}
+
+.volumn {
+	border-bottom: 15px solid #ff76ff !important;
 }

@@ -22,8 +22,8 @@ const styles = theme => ({
 class SoundsOfUs extends React.Component {
 	state = {
 		baseURL: "https://s3.amazonaws.com/media.soundsof.us/",
-		baseFetchURL: "http://localhost:3001/.netlify/functions/server/api/v1/sounds",
-		// baseFetchURL: "https://api.soundsof.us/.netlify/functions/server/api/v1/sounds",
+		// baseFetchURL: "http://localhost:3001/.netlify/functions/server/api/v1/sounds",
+		baseFetchURL: "https://api.soundsof.us/.netlify/functions/server/api/v1/sounds",
 		sounds: []
 	}
 	
@@ -52,7 +52,7 @@ class SoundsOfUs extends React.Component {
 
 			return (
 				<div className={classes.container} key={i} >
-					<Description title={sound.Key}/>
+					<Description title={sound.Key.replace(/audio\/[^]*\+--\+/g, '').replace(/.wav/g, '')}/>
 					<img src={"https://loremflickr.com/200/200/home,earth?random=" + i} alt="Random - earth or home from loremflickr.com. Have been manipulated by filters to create odd effects."/>
 					<AudioPlayer src={uri} />
 				</div>
