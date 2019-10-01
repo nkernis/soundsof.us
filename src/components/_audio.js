@@ -1,4 +1,4 @@
-const _audio = (p, carl) => {
+const _audio = (p) => {
 	p.userStartAudio()
 }
 
