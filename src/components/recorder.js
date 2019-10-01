@@ -70,7 +70,6 @@ const styles = (theme) => ({
 
 const mic = new p5.AudioIn()
 const soundRec = new p5.SoundRecorder()
-const soundFile = new p5.SoundFile()
 
 mic.start()
 soundRec.setInput(mic)
@@ -86,7 +85,7 @@ const Timer = (props) => {
 			</button>
 			<button className={classes.recButtons} onClick={playAction}>PLAY SOUND</button>
 			<button className={classes.recButtons} onClick={saveAction}>SAVE SOUND</button>
-			<p>Recorder Time: <b>{time} seconds</b> [Max: 60 seconds]</p>
+			<p>Recorder Time: <b>{time} seconds</b> [Max: 25 seconds]</p>
 		</React.Fragment>
 	)
 }
@@ -151,25 +150,30 @@ class Recorder extends React.Component {
 
 
 	startRec = (resetTimer, startTimer) => {		
+		let soundFile = new p5.SoundFile()
+		soundRec.record(soundFile)
+		
 		resetTimer()
 		startTimer()
-		soundRec.record(soundFile)
-		this.props.setTimeout(this.stopRec, 60000)
+
+		this.props.setTimeout(this.stopRec, 25000)
 
 		this.setState({
-			recording: true
+			recording: true,
+			soundFile: soundFile
 		})
 	}
 
 	stopRec = (pauseTimer) => {
 		if (this.state.recording) {
-			pauseTimer()
 			soundRec.stop()
+			
 			this.props.clearTimeout()
+
+			pauseTimer()
 
 			this.setState({
 				recording: false,
-				soundFile: soundFile,
 				recButtonText: "START REC"
 			})
 		}
@@ -177,7 +181,7 @@ class Recorder extends React.Component {
 
 	playBack = () => {
 		if (this.state.soundFile) {
-			soundFile.play()
+			this.state.soundFile.play()
 		} else {
 			alert("I - the website - can't play back the audio.\n\nYou have not recorded any sound yet fool!")
 		}
