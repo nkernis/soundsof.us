@@ -6,7 +6,6 @@ import { textAlign } from '@material-ui/system';
 
 const styles = theme => ({
   container: {
-	marginBottom: 100,
 	textAlign: "center"
   }
 })
@@ -17,7 +16,7 @@ class FourZeroFour extends React.Component {
 
     return (
       <div className={classes.container}>
-        <Typography variant="h1">
+        <Typography variant="h2">
           [ 404 - THIS IS NOT A PAGE ]
         </Typography>
       </div>
