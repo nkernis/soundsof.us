@@ -18,7 +18,7 @@ class Policy extends React.Component {
 
     return (
       <div className={classes.container}>
-		  THIS SHOULD WORK - POLICY
+		POLICY
       </div>
     );
   }

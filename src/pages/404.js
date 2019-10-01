@@ -2,17 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import { textAlign } from '@material-ui/system';
 
 const styles = theme => ({
   container: {
-    marginBottom: 100
-  },
-  media: {
-    height: '600px',
-    [theme.breakpoints.down('xs')]: {
-      width: '80vw',
-      height: 'auto'
-    }
+	marginBottom: 100,
+	textAlign: "center"
   }
 })
 
@@ -22,13 +17,8 @@ class FourZeroFour extends React.Component {
 
     return (
       <div className={classes.container}>
-        <img
-          className={classes.media}
-          src='https://s3.amazonaws.com/media.noahkernis.com/images/404.jpeg'
-          alt='404.jepg'
-        />
-        <Typography variant="body1">
-          [ 404 - Please try a differnt page ]
+        <Typography variant="h1">
+          [ 404 - THIS IS NOT A PAGE ]
         </Typography>
       </div>
     );

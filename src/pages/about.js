@@ -18,7 +18,7 @@ class About extends React.Component {
 
     return (
       <div className={classes.container}>
-		  THIS SHOULD WORK - ABOUT
+		ABOUT
       </div>
     );
   }
