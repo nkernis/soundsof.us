@@ -78,7 +78,7 @@ const soundFile = new p5.SoundFile()
 
 const Timer = (props) => {
 	const { classes, recButtonAction, playAction, saveAction, isRecording } = props
-	const { time, start, pause, reset } = useTimer({endTime: 25})
+	const { time, start, pause, reset } = useTimer({endTime: 20})
 
 	return (
 		<React.Fragment>
@@ -87,7 +87,7 @@ const Timer = (props) => {
 			</button>
 			<button className={classes.recButtons} onClick={playAction}>PLAY SOUND</button>
 			<button className={classes.recButtons} onClick={saveAction}>SAVE SOUND</button>
-			<p>Recorder Time: <b>{time} seconds</b> [Max: 25 seconds]</p>
+			<p>Recorder Time: <b>{time} seconds</b> [Max: 20 seconds]</p>
 		</React.Fragment>
 	)
 }
@@ -154,7 +154,7 @@ class Recorder extends React.Component {
 		resetTimer()
 		startTimer()
 		soundRec.record(soundFile)
-		this.props.setTimeout(() => this.stopRec(pauseTimer), 25000)
+		this.props.setTimeout(() => this.stopRec(pauseTimer), 20000)
 
 		this.setState({
 			recording: true
@@ -164,7 +164,7 @@ class Recorder extends React.Component {
 	stopRec = (pauseTimer) => {
 		if (this.state.recording) {
 			pauseTimer()
-			soundRec.stop().catch(e => console.log(e))
+			soundRec.stop()
 			this.props.clearTimeout()
 
 			this.setState({
