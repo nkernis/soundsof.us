@@ -29,7 +29,7 @@ class NavBar extends React.Component {
   state = {
     pages: [
       'ABOUT',
-      'POLICY'
+    //   'POLICY'
     ]
   }
 

@@ -1,24 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
-  container:{
-    marginBottom: 100
-  }
+	container: {
+		textAlign: "center !important"
+	},
+	content: {
+		textAlign: "left",
+		display: "inline-block",
+		width: "80vw"
+	}
 })
 
 class Policy extends React.Component {
-//   state = {}
-
-  render() {
+render() {
     const { classes } = this.props
 
     return (
       <div className={classes.container}>
-		POLICY
+		<Typography variant="h2" style={{marginBottom: 25}}>
+        	POLICY
+        </Typography>
+		{/* <div className={classes.content}>
+			<Typography variant="h5" style={{marginBottom: 25}}>
+				HEADER
+			</Typography>
+			<p>
+			</p>
+		</div> */}
       </div>
     );
   }
