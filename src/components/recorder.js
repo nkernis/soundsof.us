@@ -70,6 +70,7 @@ const styles = (theme) => ({
 
 const mic = new p5.AudioIn()
 const soundRec = new p5.SoundRecorder()
+const soundFile = new p5.SoundFile()
 
 mic.start()
 soundRec.setInput(mic)
@@ -150,30 +151,25 @@ class Recorder extends React.Component {
 
 
 	startRec = (resetTimer, startTimer) => {		
-		let soundFile = new p5.SoundFile()
-		soundRec.record(soundFile)
-		
 		resetTimer()
 		startTimer()
-
+		soundRec.record(soundFile)
 		this.props.setTimeout(this.stopRec, 25000)
 
 		this.setState({
-			recording: true,
-			soundFile: soundFile
+			recording: true
 		})
 	}
 
 	stopRec = (pauseTimer) => {
 		if (this.state.recording) {
-			soundRec.stop()
-			
-			this.props.clearTimeout()
-
 			pauseTimer()
+			soundRec.stop()
+			this.props.clearTimeout()
 
 			this.setState({
 				recording: false,
+				soundFile: soundFile,
 				recButtonText: "START REC"
 			})
 		}
@@ -181,7 +177,7 @@ class Recorder extends React.Component {
 
 	playBack = () => {
 		if (this.state.soundFile) {
-			this.state.soundFile.play()
+			soundFile.play()
 		} else {
 			alert("I - the website - can't play back the audio.\n\nYou have not recorded any sound yet fool!")
 		}
