@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Description from '../components/description.js';
 import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Recorder from '../components/recorder.js';
 import AudioPlayer from "react-h5-audio-player";
@@ -12,10 +13,21 @@ const styles = theme => ({
 		padding: theme.spacing(2.0),
 		textAlign: "center"
 	},
-	description: {
+	card: {
+		padding: theme.spacing(2.0),
+		textAlign: "center",
+		minWidth: 275,
+		maxWidth: 275,
+		boxShadow: "none"
+	},
+	sectionTitle: {
 		padding: theme.spacing(5.0),
 		paddingBottom: theme.spacing(8.0),
 		fontSize: "3.5vw",
+	},
+	cardTitle: {
+		fontSize: 15,
+		paddingBottom: 10
 	}
 })
 
@@ -28,13 +40,16 @@ class SoundsOfUs extends React.Component {
 	}
 	
 	componentDidMount() {
+		this.getSounds()
+	}
+
+	getSounds = () =>  {
 		fetch(this.state.baseFetchURL)
 			.then(res => res.json())
 			.then(data => {
 				let sounds = data.Contents
 				sounds.shift()
 				sounds.reverse()
-				
 				this.setState({
 					sounds: sounds
 				})
@@ -51,11 +66,19 @@ class SoundsOfUs extends React.Component {
 			let uri = baseURL + encodeURIComponent(sound.Key)
 
 			return (
-				<div className={classes.container} key={i} >
-					<Description title={sound.Key.replace(/audio\/[^]*\+--\+/g, '').replace(/.wav/g, '')}/>
-					<img src={"https://loremflickr.com/200/200/home,earth?random=" + i} alt="Random - earth or home from loremflickr.com. Have been manipulated by filters to create odd effects."/>
-					<AudioPlayer src={uri} />
-				</div>
+				<Card className={classes.card}>
+					<CardContent className={classes.card}>
+						<Typography variant="h6" className={classes.cardTitle}>
+							{ sound.Key.replace(/audio\/[^]*\+--\+/g, '').replace(/.wav/g, '') }
+						</Typography>
+						<img 
+							src={"https://loremflickr.com/200/200/home,earth?random=" + i} 
+							alt="Random - earth or home from loremflickr.com. Have been manipulated by filters to create odd effects."
+							style={{paddingBottom: 10}}
+						/>
+						<AudioPlayer src={uri} />
+					</CardContent>
+				</Card>
 			)
 		})
 	}
@@ -65,9 +88,9 @@ class SoundsOfUs extends React.Component {
 
 		return ( 
 		<React.Fragment >
-			<Recorder/>
+			<Recorder />
 			<div className={classes.container}>
-				<Typography variant='h2' className={classes.description}>
+				<Typography variant='h2' className={classes.sectionTitle}>
 					SOUNDS FOR LISTENING
 				</Typography>
 				<Grid

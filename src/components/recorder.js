@@ -26,10 +26,14 @@ const styles = (theme) => ({
 		height: "45px",
 		background: "white",
 		border: "1px solid black",
-
 		padding: "5px",
 		margin: "10px 2px 10px 2px",
-		verticalAlign: "top"
+		fontWeight: "bold",
+		verticalAlign: "top",
+		'&:hover': {
+			background: "black",
+			color: "white"
+		}
 	},
 	showRec: {
 		display: "inline-block",
@@ -115,7 +119,8 @@ class Recorder extends React.Component {
 					/>
 					<input
 						ref="input"
-						placeholder='NAME FOR SOUND'
+						maxlength = "40"
+						placeholder='Name [Max: 40 char]'
 						value={this.state.soundName}
 						onChange={(e)=>{this.setState({soundName:e.target.value});}}
 						onFocus={()=>{this.refs.input.select()}}
@@ -144,6 +149,8 @@ class Recorder extends React.Component {
 
 
 	startRec = (resetTimer, startTimer) => {
+		// getAudioContext().resume()
+		
 		resetTimer()
 		startTimer()
 		soundRec.record(soundFile)
@@ -196,6 +203,7 @@ class Recorder extends React.Component {
 				fetch(this.state.baseURL, fetchOptions)
 					.then(res => {
 						console.log(res.status)
+						window.location.reload()
 					})
 			} else {
 				alert("Sound must have a name.\n\n\"Because it is my name! Because I cannot have another in my life!\"")
