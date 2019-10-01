@@ -6,6 +6,8 @@ import { useTimer } from "use-timer"
 import { ReactMic } from 'react-mic'
 import "p5/lib/addons/p5.sound.min"
 import p5 from "p5"
+import P5Wrapper from "./P5Wrapper"
+import _audio from "./_audio"
 
 const styles = (theme) => ({
 	layout: {
@@ -119,7 +121,7 @@ class Recorder extends React.Component {
 					/>
 					<input
 						ref="input"
-						maxlength = "40"
+						maxLength = "40"
 						placeholder='Name [Max: 40 char]'
 						value={this.state.soundName}
 						onChange={(e)=>{this.setState({soundName:e.target.value});}}
@@ -148,9 +150,7 @@ class Recorder extends React.Component {
 	}
 
 
-	startRec = (resetTimer, startTimer) => {
-		// getAudioContext().resume()
-		
+	startRec = (resetTimer, startTimer) => {		
 		resetTimer()
 		startTimer()
 		soundRec.record(soundFile)
@@ -222,6 +222,8 @@ class Recorder extends React.Component {
 				<div className={classes.layout}>
 					{this.showRecorder(classes, recording)}
 				</div>
+
+				{ recording ? <P5Wrapper sketch={(carl) => _audio(carl, "haha")}/> : ""}
 			</React.Fragment>
 		)
 	}

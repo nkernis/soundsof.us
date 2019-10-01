@@ -66,7 +66,7 @@ class SoundsOfUs extends React.Component {
 			let uri = baseURL + encodeURIComponent(sound.Key)
 
 			return (
-				<Card className={classes.card}>
+				<Card className={classes.card} key={i}>
 					<CardContent className={classes.card}>
 						<Typography variant="h6" className={classes.cardTitle}>
 							{ sound.Key.replace(/audio\/[^]*\+--\+/g, '').replace(/.wav/g, '') }
