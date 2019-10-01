@@ -67,7 +67,7 @@ class SoundsOfUs extends React.Component {
 
 			return (
 				<Card className={classes.card} key={i}>
-					<CardContent className={classes.card}>
+					<CardContent>
 						<Typography variant="h6" className={classes.cardTitle}>
 							{ sound.Key.replace(/audio\/[^]*\+--\+/g, '').replace(/.wav/g, '') }
 						</Typography>
