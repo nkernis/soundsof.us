@@ -143,18 +143,18 @@ class Recorder extends React.Component {
 		const { recording } = this.state
 
 		if (!recording) {
-			this.startRec(resetTimer, startTimer)
+			this.startRec(resetTimer, startTimer, pauseTimer)
 		} else {
 			this.stopRec(pauseTimer)
 		}
 
 	}
 
-	startRec = (resetTimer, startTimer) => {		
+	startRec = (resetTimer, startTimer, pauseTimer) => {
 		resetTimer()
 		startTimer()
 		soundRec.record(soundFile)
-		this.props.setTimeout(this.stopRec, 25000)
+		this.props.setTimeout(() => this.stopRec(pauseTimer), 25000)
 
 		this.setState({
 			recording: true
