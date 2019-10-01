@@ -69,15 +69,16 @@ const styles = (theme) => ({
 })
 
 const mic = new p5.AudioIn()
-const soundRec = new p5.SoundRecorder()
-const soundFile = new p5.SoundFile()
-
 mic.start()
+
+const soundRec = new p5.SoundRecorder()
 soundRec.setInput(mic)
+
+const soundFile = new p5.SoundFile()
 
 const Timer = (props) => {
 	const { classes, recButtonAction, playAction, saveAction, isRecording } = props
-	const { time, start, pause, reset } = useTimer({endTime: 60})
+	const { time, start, pause, reset } = useTimer({endTime: 25})
 
 	return (
 		<React.Fragment>
@@ -149,7 +150,6 @@ class Recorder extends React.Component {
 
 	}
 
-
 	startRec = (resetTimer, startTimer) => {		
 		resetTimer()
 		startTimer()
@@ -164,7 +164,7 @@ class Recorder extends React.Component {
 	stopRec = (pauseTimer) => {
 		if (this.state.recording) {
 			pauseTimer()
-			soundRec.stop()
+			soundRec.stop().catch(e => console.log(e))
 			this.props.clearTimeout()
 
 			this.setState({
